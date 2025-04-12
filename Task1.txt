@@ -1,1 +1,106 @@
 Task 1 : 
+
+
+Theoretical Part:
+
+ Explain the purpose of the following Git commands:
+
+- "git status:"
+  Displays the current state of the project — shows which changes are staged, which are unstaged, and which files are new (untracked).
+
+- "git init:"
+  Initializes a new directory as a Git repository. It creates hidden files that allow Git to track changes.
+
+- "git commit:"
+  Saves staged changes with a message describing what was changed. It acts like a snapshot of the project at that moment.
+
+- "git push:"
+  Uploads committed changes to a remote repository (like GitHub) to keep the online version up-to-date.
+
+ Comment on Ahmed's Statement:
+   Ahmed claims there’s no need for the "git add" command and suggests committing changes directly from the working directory.
+    I "disagree with Ahmed".
+    Because Git follows a "staging phase" before committing, which is essential to:
+    - Precisely select what changes you want to include.
+    - Review the modifications before saving them.
+    - Avoid accidentally adding unnecessary files.
+
+Also, skipping the "staging phase" can lead to "conflicts" when multiple people are working on the same project. The staging area helps control exactly what is being committed step by step.
+
+ Questions about Code Hosting Providers:
+
+1. "Name two platforms besides GitHub:"
+   - GitLab  
+   - Bitbucket
+
+2. What key features do code hosting providers offer to enhance version control?
+   - Easy collaboration for teams.
+   - Code review tools.
+   - Version and modification tracking.
+   - Permission management.
+   - Integration with other tools (CI/CD).
+
+3. True or False:
+   A team can collaborate on a software project without relying on popular hosting platforms by setting up their own self-hosted version control server.  
+    "Answer: True"
+
+ What is the purpose of the flag in commands?
+A flag provides additional options that control the behavior of a command.
+For example:
+
+git push -u origin main
+
+The `-u` flag (short for `--set-upstream`) links the local branch with the remote branch. So later, you can simply type:
+git push
+git pull
+
+without specifying the branch name, as it’s now automatically linked.
+
+
+Steps to Link Local Git Repository with GitHub Using SSH
+
+1. Setting Up SSH Key:
+   The first step is to create an SSH key to secure the connection between your local machine and GitHub. Use the following command to generate the SSH key:
+   ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+   
+   After running this command, the key will be stored in the `.ssh` folder on your machine. This key will be required for SSH authentication with GitHub.
+
+2. Adding the Key to GitHub Account:
+   After creating the key, you need to add the public key to your GitHub account. To copy the public key, use the command:
+ 
+   cat ~/.ssh/id_rsa.pub
+  
+   After copying the key, go to your GitHub account settings, select "SSH and GPG keys," then click "New SSH key" and paste the copied key in the designated field.
+
+3. Creating a Local Git Repository:
+   Next, navigate to the folder where you want to create the project and initialize a new Git repository by running:
+ 
+   git init
+  
+
+4. Linking Local Repository with GitHub via SSH:
+   Now, you need to link the local repository to your GitHub repository using SSH. Go to your GitHub repository, copy the SSH URL (choose "SSH" instead of "HTTPS"). Then, run the following command to link your local repository:
+   
+   git remote add origin git@github.com:username/repository-name.git
+
+
+5. Making the First Commit and Push:
+   After linking the repository, add the changes to the repository using the following commands:
+  
+   git add .
+   git commit -m "Initial commit"
+   
+   Then, push the changes to GitHub using:
+ 
+   git push -u origin master
+   
+
+6. Verifying the Connection:
+   To ensure that the SSH connection with GitHub is successful, run the following command:
+ 
+   ssh -T git@github.com
+   
+   If the connection is successful, you'll see a message like:
+   
+   Hi username! You've successfully authenticated, but GitHub does not provide shell access.
+   
